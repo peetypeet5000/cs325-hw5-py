@@ -24,8 +24,8 @@ class Graph:
     def findDistance(self, point1, point2):
         #Pythagorean theorum between the two points
         dist = math.sqrt(((self.points[point1][0] - self.points[point2][0]) ** 2 )+ ((self.points[point1][1] - self.points[point2][1]) ** 2 ))
-        #cast to int before returning
-        return int(dist)
+        #round to nearest int before returning
+        return round(dist)
 
     #fill in the adjacency matrix with weight values
     def calculateWeights(self):
@@ -74,6 +74,7 @@ class Graph:
 
         #keep track of the total MST weight
         totalWeight = 0
+        lastVert = 0
 
         #start with all keys as infinity, except the first one as zero 
         keys = [float('inf')] * len(self.points)
@@ -81,8 +82,10 @@ class Graph:
 
         #loop enough times to include all verticies
         for i in range(len(self.points)):
+            if i > 0:
+                lastVert = minWeightVertex
             minWeightVertex = self.minWeight(keys)
-            print("Added point: ", self.points[minWeightVertex], " which adds: ", keys[minWeightVertex], " to MST.")
+            print("Added: ", self.points[lastVert], " - ", self.points[minWeightVertex], " which adds: ", keys[minWeightVertex], " to MST.")
             totalWeight += keys[minWeightVertex]
 
             #update adjacent (so all) verticies, set prev one to an invalid state
