@@ -1,4 +1,5 @@
 from modules import util
+import math
 
 class Graph:
     x = []
@@ -6,6 +7,7 @@ class Graph:
     def __init__(self):
         self.x = []
         self.y = []
+        self.weights = [[]]
 
     def addPoint (self, x, y):
         self.x.append(x)
@@ -15,6 +17,15 @@ class Graph:
         print("Points in set: ")
         for i in range(len(self.x)):
             print("X: ", self.x[i], " Y: ", self.y[i])
+
+    def calculateWeights(self):
+        self.weights = [[0 for i in range(len(self.x))] for j in range(len(self.y))] 
+        for i in range(len(self.x)):
+            for j in range(len(self.y)):
+                self.weights[i][j] = int(math.sqrt(self.x[i] ** 2 + self.y[j] ** 2))
+
+        print("Calculated Weights: ")
+        print(self.weights)        
 
 
 
@@ -36,6 +47,7 @@ for i in range(data[0][0]):
         currentGraph.addPoint(data[lineInData][0], data[lineInData][1])
     
     currentGraph.printPoints()
+    currentGraph.calculateWeights()
 
 
 
