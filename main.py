@@ -2,30 +2,44 @@ from modules import util
 import math
 
 class Graph:
-    x = []
-    y = []
+
     def __init__(self):
-        self.x = []
-        self.y = []
-        self.weights = [[]]
+        self.points = []
+        self.weights = []
 
     def addPoint (self, x, y):
-        self.x.append(x)
-        self.y.append(y)
+        self.points.append([x, y])
 
     def printPoints(self):
         print("Points in set: ")
-        for i in range(len(self.x)):
-            print("X: ", self.x[i], " Y: ", self.y[i])
+        for i in range(len(self.points)):
+            print(self.points[i])
+
+    def findDistance(self, point1, point2):
+        #Pythagorean theorum between the two points
+        dist = math.sqrt(((self.points[point1][0] - self.points[point2][0]) ** 2 )+ ((self.points[point1][1] - self.points[point2][1]) ** 2 ))
+        #cast to int before returning
+        return int(dist)
 
     def calculateWeights(self):
-        self.weights = [[0 for i in range(len(self.x))] for j in range(len(self.y))] 
-        for i in range(len(self.x)):
-            for j in range(len(self.y)):
-                self.weights[i][j] = int(math.sqrt(self.x[i] ** 2 + self.y[j] ** 2))
+        for i in range(len(self.points)):
+            #For each row, append another row
+            self.weights.append([])
+
+            #calculate the distance between every point
+            for j in range(len(self.points)):
+                self.weights[i].append(self.findDistance(i, j))
 
         print("Calculated Weights: ")
-        print(self.weights)        
+        print(self.weights)   
+
+
+    def calculateMST(self):
+        #Fill in weights before proceeding
+        self.calculateWeights
+
+        #
+        🖖🏿
 
 
 
@@ -47,7 +61,7 @@ for i in range(data[0][0]):
         currentGraph.addPoint(data[lineInData][0], data[lineInData][1])
     
     currentGraph.printPoints()
-    currentGraph.calculateWeights()
+    currentGraph.calculateMST()
 
 
 
