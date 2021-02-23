@@ -1,5 +1,3 @@
-
-
 def readFile(): 
     graphFile = open("graph.txt")
 
