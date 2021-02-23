@@ -1,3 +1,6 @@
+
+# A utility function to read in the graph.txt file
+# and cast the values to a 2D array of ints
 def readFile(): 
     graphFile = open("graph.txt")
 
